@@ -9,7 +9,9 @@ import sched
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
-from configparser import  ConfigParser
+from configparser import ConfigParser
+import json
+
 
 cfg = ConfigParser()
 schduler = sched.scheduler(time.time, time.sleep)
@@ -29,11 +31,14 @@ def main():
 
 
 def lint():
-    schduler.enter(cfg.getint('sched', 'sched_duration'), 0, lint)
-    git_source_list = cfg.options('git')
+    schduler.enter(cfg.getfloat('sched', 'sched_duration'), 0, lint)
+    git_source_list = json.loads(cfg.get('git', 'git_sources'))
 
     # git clone
-    git_clone_shell_command_set = ('git clone ' + git_source + ';' for git_source in git_source_list)
+    # git_clone_shell_command_set = ('git clone ' + git_source + ';' for git_source in git_source_list)
+    git_clone_shell_command_set = set()
+    for git_source in git_source_list:
+        git_clone_shell_command_set.add('git clone ' + git_source + ';')
     git_clone_shell_command = ' '.join(str(git_clone_shell_command) for git_clone_shell_command in git_clone_shell_command_set)
     run_shell(git_clone_shell_command)
 
@@ -90,7 +95,7 @@ def mail(content):
     mail_sender = cfg.get('mail', 'mail_sender')
     mail_smtp_ssl_port = cfg.getint('mail', 'mail_smtp_ssl_port')
     mail_subject = cfg.get('mail', 'mail_subject')
-    receivers = cfg.options('receivers')
+    receivers = json.loads(cfg.get('mail', 'mail_receivers'))
     try:
         message = MIMEText('pod lib lint 验证有误\n' + content, 'plain', 'utf-8')
         message['From'] = formataddr(['FDPodBot', mail_sender])
