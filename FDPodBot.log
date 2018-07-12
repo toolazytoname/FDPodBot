@@ -1,0 +1,68 @@
+INFO:2018-07-12 15:07:45,798:lint_shell_command : cd /Users/yiche/Code/downloadDemo/FDPodBot/BPBaseFuncLib;git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries; passed validation
+INFO:2018-07-12 15:10:10,044:lint_shell_command : cd /Users/yiche/Code/downloadDemo/FDPodBot/BPNewsLib;git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries; passed validation
+INFO:2018-07-12 15:11:36,090:lint_shell_command : cd /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries; passed validation
+CRITICAL:2018-07-12 15:11:39,224: [Alarm] lint_shell_command :cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint 
+ log is:warning: redirecting to http://gitlab.bitautotech.com/WP/Mobile/IOS/BPMessageCenterLib.git/
+Already up to date.
+
+ -> BPMessageCenterLib -> BPMessageCenterLib (0.1.4)
+    - ERROR | [iOS] unknown: Encountered an unknown error (Unable to find a specification for `BPBundleLib` depended upon by `BPMessageCenterLib`) during validation.
+
+[!] BPMessageCenterLib did not pass validation, due to 1 error.
+You can use the `--no-clean` option to inspect any issue.
+
+ not passed validation
+CRITICAL:2018-07-12 16:49:40,385:邮件发送成功
+CRITICAL:2018-07-12 17:04:48,108:邮件发送成功
+INFO:2018-07-12 17:11:42,906:lint_shell_command : cd /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries; passed validation
+INFO:2018-07-12 17:13:09,389:lint_shell_command : cd /Users/yiche/Code/downloadDemo/FDPodBot/BPNewsLib;git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries; passed validation
+INFO:2018-07-12 17:29:20,538:lint_shell_command : cd /Users/yiche/Code/downloadDemo/FDPodBot/BPBaseFuncLib;git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries; passed validation
+CRITICAL:2018-07-12 17:29:22,988:  [Alarm] lint_shell_command :cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint 
+ log is:warning: redirecting to http://gitlab.bitautotech.com/WP/Mobile/IOS/BPMessageCenterLib.git/
+Already up to date.
+
+ -> BPMessageCenterLib -> BPMessageCenterLib (0.1.4)
+    - ERROR | [iOS] unknown: Encountered an unknown error (Unable to find a specification for `BPBundleLib` depended upon by `BPMessageCenterLib`) during validation.
+
+[!] BPMessageCenterLib did not pass validation, due to 1 error.
+You can use the `--no-clean` option to inspect any issue.
+
+ not passed validation 
+CRITICAL:2018-07-12 17:29:25,736:邮件发送成功
+INFO:2018-07-12 19:17:26,487:lint_shell_command : cd /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries; passed validation
+CRITICAL:2018-07-12 19:17:28,521:  [Alarm] lint_shell_command :cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint 
+ log is:warning: redirecting to http://gitlab.bitautotech.com/WP/Mobile/IOS/BPMessageCenterLib.git/
+Already up to date.
+
+ -> BPMessageCenterLib -> BPMessageCenterLib (0.1.4)
+    - ERROR | [iOS] unknown: Encountered an unknown error (Unable to find a specification for `BPBundleLib` depended upon by `BPMessageCenterLib`) during validation.
+
+[!] BPMessageCenterLib did not pass validation, due to 1 error.
+You can use the `--no-clean` option to inspect any issue.
+
+ not passed validation 
+CRITICAL:2018-07-12 19:17:30,160:邮件发送成功
+CRITICAL:2018-07-12 19:19:23,263:  [Alarm] lint_shell_command :cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint 
+ log is:warning: redirecting to http://gitlab.bitautotech.com/WP/Mobile/IOS/BPMessageCenterLib.git/
+Already up to date.
+
+ -> BPMessageCenterLib -> BPMessageCenterLib (0.1.4)
+    - ERROR | [iOS] unknown: Encountered an unknown error (Unable to find a specification for `BPBundleLib` depended upon by `BPMessageCenterLib`) during validation.
+
+[!] BPMessageCenterLib did not pass validation, due to 1 error.
+You can use the `--no-clean` option to inspect any issue.
+
+ not passed validation 
+CRITICAL:2018-07-12 19:19:24,947:邮件发送成功
+CRITICAL:2018-07-12 19:34:22,761:  [Alarm] lint_shell_command :cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint 
+ log is:warning: redirecting to http://gitlab.bitautotech.com/WP/Mobile/IOS/BPMessageCenterLib.git/
+Already up to date.
+
+ -> BPMessageCenterLib -> BPMessageCenterLib (0.1.4)
+    - ERROR | [iOS] unknown: Encountered an unknown error (Unable to find a specification for `BPBundleLib` depended upon by `BPMessageCenterLib`) during validation.
+
+[!] BPMessageCenterLib did not pass validation, due to 1 error.
+You can use the `--no-clean` option to inspect any issue.
+
+ not passed validation 
+CRITICAL:2018-07-12 19:34:24,463:邮件发送成功
