@@ -63,7 +63,7 @@ def lint():
             # checkout_command = 'git checkout --track origin/' + git_develop_branch_dic[repo_directory_filename] + ';'
             checkout_command = 'git checkout ' + git_develop_branch_dic[repo_directory_filename] + ';'
         lint_shell_command_list.append(
-            'cd ' + repo_directory + ';git pull;' + checkout_command + "git log -1;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries;")
+            'cd ' + repo_directory + ';git pull;' + checkout_command + "git log -1;git branch;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries;")
 
     for lint_shell_command in lint_shell_command_list:
         out_text = run_shell(lint_shell_command)
