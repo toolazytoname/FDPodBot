@@ -60,7 +60,8 @@ def lint():
         (repo_directory_dirname, repo_directory_filename) = os.path.split(repo_directory)
         checkout_command = ''
         if git_develop_branch_dic.__contains__(repo_directory_filename):
-            checkout_command = 'git checkout --track origin/' + git_develop_branch_dic[repo_directory_filename] + ';'
+            # checkout_command = 'git checkout --track origin/' + git_develop_branch_dic[repo_directory_filename] + ';'
+            checkout_command = 'git checkout ' + git_develop_branch_dic[repo_directory_filename] + ';'
         lint_shell_command_list.append(
             'cd ' + repo_directory + ';git pull;' + checkout_command + "pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries;")
 
