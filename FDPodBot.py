@@ -20,6 +20,7 @@ def main():
     # Configure the logging system
     logging.config.fileConfig('logconfig.ini')
     cfg.read('FDPodBot.ini')
+    # mail('content')
     sched()
     # lint()
 
@@ -57,8 +58,8 @@ def lint():
     for repo_directory in repo_directory_set:
         lint_shell_command_set.add(
             'cd ' + repo_directory + ";git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries;")
-    lint_shell_command_set.add(
-        'cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint')
+    # lint_shell_command_set.add(
+    #     'cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint')
 
     for lint_shell_command in lint_shell_command_set:
         out_text = run_shell(lint_shell_command)
@@ -100,7 +101,7 @@ def mail(content):
     try:
         message = MIMEText('pod lib lint 验证有误\n' + content, 'plain', 'utf-8')
         message['From'] = formataddr(['FDPodBot', mail_sender])
-        message['To'] = formataddr(['iOS developer', mail_receivers[0]])
+        message['To'] = ','.join(mail_receivers)
         message['Subject'] = mail_subject
         server = smtplib.SMTP_SSL(mail_host, mail_smtp_ssl_port)
         server.login(mail_user, mail_pass)
