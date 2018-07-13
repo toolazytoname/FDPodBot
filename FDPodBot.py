@@ -20,15 +20,16 @@ def main():
     # Configure the logging system
     logging.config.fileConfig('logconfig.ini')
     cfg.read('FDPodBot.ini')
+    sched()
+    # lint()
 
+def sched():
     now = datetime.now()
     sched_time = datetime(now.year, now.month, now.day, cfg.getint('sched', 'sched_hour'), cfg.getint('sched', 'sched_minute'), cfg.getint('sched', 'sched_second'))
     if sched_time < now:
         sched_time = sched_time.replace(day=now.day+1)
     schduler.enterabs(sched_time.timestamp(), 0, lint)
     schduler.run()
-    # lint()
-
 
 def lint():
     schduler.enter(cfg.getfloat('sched', 'sched_duration'), 0, lint)
@@ -72,10 +73,10 @@ def run_shell(shell_command):
         out_bytes = subprocess.check_output(shell_command, stderr=subprocess.STDOUT, shell=True)
     except subprocess.CalledProcessError as e:
         out_bytes = e.output
-        code = e.returncode
+        # code = e.returncode
     finally:
         out_text = out_bytes.decode('utf-8')
-        logging.debug('code:%s \nout_text is: %r', code, out_text)
+        logging.debug('out_text is: %r', out_text)
         return out_text
 
 
@@ -95,15 +96,15 @@ def mail(content):
     mail_sender = cfg.get('mail', 'mail_sender')
     mail_smtp_ssl_port = cfg.getint('mail', 'mail_smtp_ssl_port')
     mail_subject = cfg.get('mail', 'mail_subject')
-    receivers = json.loads(cfg.get('mail', 'mail_receivers'))
+    mail_receivers = json.loads(cfg.get('mail', 'mail_receivers'))
     try:
         message = MIMEText('pod lib lint 验证有误\n' + content, 'plain', 'utf-8')
         message['From'] = formataddr(['FDPodBot', mail_sender])
-        message['To'] = formataddr(['iOS developer', receivers[0]])
+        message['To'] = formataddr(['iOS developer', mail_receivers[0]])
         message['Subject'] = mail_subject
         server = smtplib.SMTP_SSL(mail_host, mail_smtp_ssl_port)
         server.login(mail_user, mail_pass)
-        server.sendmail(mail_user, receivers, message.as_string())
+        server.sendmail(mail_user, mail_receivers, message.as_string())
         server.quit()
         logging.critical('邮件发送成功')
     except smtplib.SMTPException:
