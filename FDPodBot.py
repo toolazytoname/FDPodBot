@@ -21,8 +21,8 @@ def main():
     logging.config.fileConfig('logconfig.ini')
     cfg.read('FDPodBot.ini')
     # mail('content')
-    sched()
-    # lint()
+    # sched()
+    lint()
 
 def sched():
     now = datetime.now()
@@ -37,31 +37,34 @@ def lint():
     git_source_list = json.loads(cfg.get('git', 'git_sources'))
 
     # git clone
-    # git_clone_shell_command_set = ('git clone ' + git_source + ';' for git_source in git_source_list)
-    git_clone_shell_command_set = set()
+    git_clone_shell_command_list = list()
     for git_source in git_source_list:
-        git_clone_shell_command_set.add('git clone ' + git_source + ';')
-    git_clone_shell_command = ' '.join(str(git_clone_shell_command) for git_clone_shell_command in git_clone_shell_command_set)
+        git_clone_shell_command_list.append('git clone ' + git_source + ';')
+    git_clone_shell_command = ' '.join(str(git_clone_shell_command) for git_clone_shell_command in git_clone_shell_command_list)
     run_shell(git_clone_shell_command)
 
-    # cd; pull;lint
+    # cd; pull;checkout;lint
     current_directory = os.getcwd()
-    # repo_directory_set = (os.path.join(current_directory, repo_directory)
+    # repo_directory_list = (os.path.join(current_directory, repo_directory)
     #                       for repo_directory in os.listdir(current_directory)
     #                       if os.path.isdir((os.path.join(current_directory, repo_directory))) and repo_directory.startswith('B'))
-    repo_directory_set = set()
+    repo_directory_list = list()
     for repo_directory in os.listdir(current_directory):
         if os.path.isdir((os.path.join(current_directory, repo_directory))) and repo_directory.startswith('B'):
-            repo_directory_set.add(os.path.join(current_directory, repo_directory))
+            repo_directory_list.append(os.path.join(current_directory, repo_directory))
 
-    lint_shell_command_set = set()
-    for repo_directory in repo_directory_set:
-        lint_shell_command_set.add(
-            'cd ' + repo_directory + ";git pull;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries;")
-    # lint_shell_command_set.add(
-    #     'cd  /Users/yiche/Code/downloadDemo/FDPodBot/BPMessageCenterLib;git pull;pod lib lint')
+    git_develop_branch_dic = json.loads(cfg.get('git', 'git_develop_branch'))
 
-    for lint_shell_command in lint_shell_command_set:
+    lint_shell_command_list = list()
+    for repo_directory in repo_directory_list:
+        (repo_directory_dirname, repo_directory_filename) = os.path.split(repo_directory)
+        checkout_command = ''
+        if git_develop_branch_dic.__contains__(repo_directory_filename):
+            checkout_command = 'git checkout --track origin/' + git_develop_branch_dic[repo_directory_filename] + ';'
+        lint_shell_command_list.append(
+            'cd ' + repo_directory + ';git pull;' + checkout_command + "pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries;")
+
+    for lint_shell_command in lint_shell_command_list:
         out_text = run_shell(lint_shell_command)
         if 'passed validation' not in out_text:
             alarm(lint_shell_command, out_text)
