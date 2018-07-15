@@ -20,9 +20,8 @@ def main():
     # Configure the logging system
     logging.config.fileConfig('logconfig.ini')
     cfg.read('FDPodBot.ini')
-    # mail('content')
-    # sched()
-    lint()
+    sched()
+    # lint()
 
 def sched():
     now = datetime.now()
@@ -60,7 +59,6 @@ def lint():
         (repo_directory_dirname, repo_directory_filename) = os.path.split(repo_directory)
         checkout_command = ''
         if git_develop_branch_dic.__contains__(repo_directory_filename):
-            # checkout_command = 'git checkout --track origin/' + git_develop_branch_dic[repo_directory_filename] + ';'
             checkout_command = 'git checkout ' + git_develop_branch_dic[repo_directory_filename] + ';'
         lint_shell_command_list.append(
             'cd ' + repo_directory + ';git pull;' + checkout_command + "git log -1;git branch;pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries;")
@@ -71,6 +69,7 @@ def lint():
             alarm(lint_shell_command, out_text)
         else:
             log_lint(lint_shell_command, out_text)
+
 
 
 def run_shell(shell_command):
